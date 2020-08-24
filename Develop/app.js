@@ -33,3 +33,61 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+
+var allEmployees = [
+    {
+    type: 'input',
+    name: 'name',
+    message: 'What is the name of the employee?',
+    validate: (name) => name !== ""
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is that employees ID#?',
+        validate: (id) => id !== ""
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'What is the email address of that employee?',
+        validate: (email) => email !== ""
+        },
+    {
+        type: 'list',
+        name: "role",
+        message: "What is the role of that employee?",
+        choices: ["Manager", "Engineer", "Intern"]
+    }
+    
+]
+
+function getRoleQuestion (role) {
+    return [
+        {
+        type: 'input',
+        name: 'officeNumber',
+        message: "What is the office number of that manager?",
+        when: () => role == "Manager"
+        },
+        {
+        type: 'input', 
+        name: 'school',
+        message: "What school does that intern attend?",
+        when: () => role == "Intern"
+        },
+        {
+        type: 'input', 
+        name: 'github',
+        message: 'What is the Github username of that engineer?',
+        when: () => role == "Engineer"
+        }
+    ]
+}
+
+const addAnother = {
+    type: "confirm",
+    name: 'another',
+    message: "Would you like to add another employee?"
+}
